@@ -1,0 +1,123 @@
+{
+  "modelo_final": "XGBoost",
+  "mejor_estrategia_desbalance": {
+    "LogReg": "Sin tratamiento",
+    "RandomForest": "Sin tratamiento",
+    "XGBoost": "Sin tratamiento"
+  },
+  "hiperparametros": {
+    "LogReg": {
+      "C": 0.8472
+    },
+    "RandomForest": {
+      "max_depth": null,
+      "max_features": "sqrt",
+      "min_samples_leaf": 1,
+      "n_estimators": 258
+    },
+    "XGBoost": {
+      "colsample_bytree": 0.8042,
+      "learning_rate": 0.0403,
+      "max_depth": 7,
+      "min_child_weight": 2,
+      "n_estimators": 539,
+      "reg_lambda": 1.2165,
+      "subsample": 0.8733
+    }
+  },
+  "umbral_costo_oof": {
+    "LogReg": 0.029,
+    "RandomForest": 0.039,
+    "XGBoost": 0.005
+  },
+  "costo_oof": {
+    "LogReg": 42750,
+    "RandomForest": 40730,
+    "XGBoost": 38790
+  },
+  "test": {
+    "LogReg|0.5": {
+      "threshold": 0.5,
+      "recall": 0.6773333333333333,
+      "precision": 0.8523489932885906,
+      "f1": 0.7548291233283804,
+      "pr_auc": 0.8639496711018239,
+      "roc_auc": 0.9926050133333332,
+      "tn": 15581,
+      "fp": 44,
+      "fn": 121,
+      "tp": 254,
+      "cost": 60940
+    },
+    "LogReg|óptimo costo (OOF)": {
+      "threshold": 0.029,
+      "recall": 0.944,
+      "precision": 0.4651773981603154,
+      "f1": 0.6232394366197183,
+      "pr_auc": 0.8639496711018239,
+      "roc_auc": 0.9926050133333332,
+      "tn": 15218,
+      "fp": 407,
+      "fn": 21,
+      "tp": 354,
+      "cost": 14570
+    },
+    "RandomForest|0.5": {
+      "threshold": 0.5,
+      "recall": 0.7253333333333334,
+      "precision": 0.9411764705882353,
+      "f1": 0.8192771084337349,
+      "pr_auc": 0.9247746467205707,
+      "roc_auc": 0.9942161920000001,
+      "tn": 15608,
+      "fp": 17,
+      "fn": 103,
+      "tp": 272,
+      "cost": 51670
+    },
+    "RandomForest|óptimo costo (OOF)": {
+      "threshold": 0.039,
+      "recall": 0.976,
+      "precision": 0.4351961950059453,
+      "f1": 0.6019736842105263,
+      "pr_auc": 0.9247746467205707,
+      "roc_auc": 0.9942161920000001,
+      "tn": 15150,
+      "fp": 475,
+      "fn": 9,
+      "tp": 366,
+      "cost": 9250
+    },
+    "XGBoost|0.5": {
+      "threshold": 0.5,
+      "recall": 0.7786666666666666,
+      "precision": 0.9573770491803278,
+      "f1": 0.8588235294117647,
+      "pr_auc": 0.9356103301664577,
+      "roc_auc": 0.9961442986666666,
+      "tn": 15612,
+      "fp": 13,
+      "fn": 83,
+      "tp": 292,
+      "cost": 41630
+    },
+    "XGBoost|óptimo costo (OOF)": {
+      "threshold": 0.005,
+      "recall": 0.9733333333333334,
+      "precision": 0.46496815286624205,
+      "f1": 0.6293103448275862,
+      "pr_auc": 0.9356103301664577,
+      "roc_auc": 0.9961442986666666,
+      "tn": 15205,
+      "fp": 420,
+      "fn": 10,
+      "tp": 365,
+      "cost": 9200
+    }
+  },
+  "referencias_costo_test": {
+    "Siempre 'neg' (no hacer nada)": 187500,
+    "Siempre 'pos' (revisar todos)": 156250,
+    "Ganador IDA 2016 (referencia)": 9920
+  }
+}
