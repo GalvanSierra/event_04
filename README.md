@@ -3,7 +3,7 @@
 **Asignatura:** Análisis de Datos · **Docente:** Daniel Alexis Nieto Mora · **Periodo:** 2026-2
 **Dataset:** [APS Failure at Scania Trucks (UCI)](https://archive.ics.uci.edu/dataset/421/aps+failure+at+scania+trucks)
 
-> **Estado del avance:** ✅ EDA y preprocesamiento · ✅ Componente supervisado · ⏳ Componente no supervisado · ⏳ Análisis comparativo · ⏳ Video
+> **Estado del avance:** ✅ EDA y preprocesamiento · ✅ Componente supervisado · ✅ Componente no supervisado · ✅ Análisis comparativo · ⏳ Video
 
 ---
 
@@ -19,7 +19,7 @@ El reto plantea dos preguntas complementarias:
 | Componente         | Pregunta                                                                                           | Estado |
 | ------------------ | -------------------------------------------------------------------------------------------------- | ------ |
 | **Supervisado**    | ¿Podemos predecir qué camiones tendrán una falla en el APS, minimizando el costo de mantenimiento? | ✅     |
-| **No supervisado** | ¿Existen perfiles de funcionamiento o registros atípicos, sin usar la etiqueta?                    | ⏳     |
+| **No supervisado** | ¿Existen perfiles de funcionamiento o registros atípicos, sin usar la etiqueta?                    | ✅     |
 
 **Costo del negocio** (definido por Scania en el reto IDA 2016):
 
@@ -29,13 +29,12 @@ Un falso negativo (falla no detectada, avería en ruta) cuesta **50 veces más**
 
 ## 2. Integrantes y responsabilidades
 
-| Integrante                | Rol                                               | Entregables                                                                              |
-| ------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| David Galvan Sierra       | Datos, EDA y preprocesamiento                     | `src/data.py`, `src/preprocessing.py`, `notebooks/01_eda_preprocesamiento.ipynb`, README |
-| Federico Rodriguez Franco | Componente supervisado                            | `src/metrics.py`, `notebooks/02_supervisado.ipynb`                                       |
-| Juan David Osorio Zapata  |
-| Componente no supervisado | `notebooks/03_no_supervisado.ipynb` _(pendiente)_ |
-| Todos                     | Análisis comparativo, conclusiones y video        | `notebooks/04_comparativo_conclusiones.ipynb` _(pendiente)_                              |
+| Integrante                | Rol                                        | Entregables                                                                              |
+| ------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| David Galvan Sierra       | Datos, EDA y preprocesamiento              | `src/data.py`, `src/preprocessing.py`, `notebooks/01_eda_preprocesamiento.ipynb`, README |
+| Federico Rodriguez Franco | Componente supervisado                     | `src/metrics.py`, `notebooks/02_supervisado.ipynb`                                       |
+| Juan David Osorio Zapata  | Componente no supervisado y conclusiones   | `notebooks/03_no_supervisado.ipynb`, `notebooks/04_comparativo_conclusiones.ipynb`       |
+| Todos                     | Análisis comparativo, conclusiones y video | `notebooks/04_comparativo_conclusiones.ipynb`                                            |
 
 ## 3. Estructura del proyecto
 
@@ -50,10 +49,10 @@ evaluacion 4/
 │   ├── preprocessing.py       # build_preprocessor(), preprocessor_steps(), transformadores propios
 │   └── metrics.py             # aps_cost(), evaluate(), best_threshold_by_cost(), gráficas
 ├── notebooks/
-│   ├── 01_eda_preprocesamiento.ipynb     # Integrante 1
-│   ├── 02_supervisado.ipynb              # Integrante 2
-│   ├── 03_no_supervisado.ipynb           # Integrante 3 (pendiente)
-│   └── 04_comparativo_conclusiones.ipynb # todos (pendiente)
+│   ├── 01_eda_preprocesamiento.ipynb
+│   ├── 02_supervisado.ipynb
+│   ├── 03_no_supervisado.ipynb
+│   └── 04_comparativo_conclusiones.ipynb # todos
 ├── figures/                   # figuras exportadas por los notebooks (01_*, 02_*)
 └── results/                   # métricas en CSV/JSON generadas por los notebooks
 ```
@@ -71,17 +70,20 @@ python -m venv .venv
 ```
 
 ```bash
+cd "evaluacion 4"
 pip install -r requirements.txt
 ```
 
-**Datos:** descargar el zip desde [UCI](https://archive.ics.uci.edu/dataset/421/aps+failure+at+scania+trucks) y descomprimir `aps_failure_training_set.csv` y `aps_failure_test_set.csv` en `data/` (ver [data/README.md](data/README.md)). La función `load_aps()` salta automáticamente las ~20 líneas de licencia del encabezado y convierte `"na"` en `NaN`.
+**Datos:** descargar el zip desde [UCI](https://archive.ics.uci.edu/dataset/421/aps+failure+at+scania+trucks) y descomprimir `aps_failure_training_set.csv` y `aps_failure_test_set.csv` en `data/` (ver [data/README.md](evaluacion%204/data/README.md)). La función `load_aps()` salta automáticamente las ~20 líneas de licencia del encabezado y convierte `"na"` en `NaN`.
 
 **Orden de ejecución** (cada notebook se ejecuta desde la carpeta `notebooks/`):
 
-| Notebook                        | Tiempo aprox.* | Genera                                                                        |
-| ------------------------------- | -------------- | ----------------------------------------------------------------------------- |
-| `01_eda_preprocesamiento.ipynb` | ~15 min        | `figures/01_*.png`, `results/01_*.csv`                                        |
-| `02_supervisado.ipynb`          | ~40 min        | `figures/02_*.png`, `results/02_*.csv`, `results/02_supervisado_metrics.json` |
+| Notebook                            | Tiempo aprox.* | Genera                                                                        |
+| ----------------------------------- | -------------- | ----------------------------------------------------------------------------- |
+| `01_eda_preprocesamiento.ipynb`     | ~15 min        | `figures/01_*.png`, `results/01_*.csv`                                        |
+| `02_supervisado.ipynb`              | ~40 min        | `figures/02_*.png`, `results/02_*.csv`, `results/02_supervisado_metrics.json` |
+| `03_no_supervisado.ipynb`           | variable       | `figures/03_*.png`, `results/03_*.csv`                                        |
+| `04_comparativo_conclusiones.ipynb` | lectura        | comparación y conclusiones                                                    |
 
 \* En un portátil de 8 núcleos. La mayor parte del tiempo se va en la validación cruzada de 12 combinaciones modelo×estrategia y en la búsqueda de hiperparámetros.
 
@@ -118,9 +120,9 @@ Fuente: Scania CV AB (2016), _APS Failure and Operational Data for Scania Trucks
 - **Preprocesamiento final:** se eliminan 7 columnas con más del 70 % de NaN, se imputa la mediana con indicadores, se aplica `log1p`, se eliminan las variables constantes y las de |r| > 0,95, y se estandariza. Resultado: **170 → 143 columnas**. Todo se ajusta solo con el train dentro de un `Pipeline` (sin fuga de información).
 - **PCA:** hacen falta 53 componentes para el 90 % de la varianza. En t-SNE, las fallas forman **varios grupos compactos**, lo que sugiere más de un perfil de falla.
 
-| Proyección PCA             | t-SNE                         |
-| -------------------------- | ----------------------------- |
-| ![PCA](figures/01_pca.png) | ![t-SNE](figures/01_tsne.png) |
+| Proyección PCA                            | t-SNE                                        |
+| ----------------------------------------- | -------------------------------------------- |
+| ![PCA](evaluacion%204/figures/01_pca.png) | ![t-SNE](evaluacion%204/figures/01_tsne.png) |
 
 ### 6.2 Componente supervisado (notebook 02)
 
@@ -149,21 +151,21 @@ Fuente: Scania CV AB (2016), _APS Failure and Operational Data for Scania Trucks
 3. **El F1 y la accuracy engañan aquí.** El F1 baja de 0,86 a 0,63 justo cuando el costo cae un 78 %, porque pondera FP y FN por igual.
 4. **Variables más relevantes** (SHAP y permutación): `aa_000`, `ck_000`, `bs_000`, `cb_000`, `ai_000` y la _forma_ de los histogramas `ay`, `az` y `ag`, que reúnen cerca del 36 % de la importancia SHAP. Al estar anonimizadas, no es posible interpretarlas físicamente.
 
-| Costo vs umbral (OOF)                    | Importancia SHAP                     |
-| ---------------------------------------- | ------------------------------------ |
-| ![Costo](figures/02_costo_vs_umbral.png) | ![SHAP](figures/02_shap_summary.png) |
+| Costo vs umbral (OOF)                                   | Importancia SHAP                                    |
+| ------------------------------------------------------- | --------------------------------------------------- |
+| ![Costo](evaluacion%204/figures/02_costo_vs_umbral.png) | ![SHAP](evaluacion%204/figures/02_shap_summary.png) |
 
 **Propuesta de mantenimiento preventivo:** clasificar la flota en niveles de riesgo (_Normal_, _Vigilancia_, _Revisión programada_, _Taller inmediato_) según la probabilidad del modelo, vigilar los sensores clave, acortar los intervalos de inspección del APS en camiones con mucho uso acumulado y recalcular el umbral cuando cambien los costos o la tasa de fallas.
 
-### 6.3 Componente no supervisado (notebook 03) — _pendiente_
+### 6.3 Componente no supervisado (notebook 03)
 
-Plan: Isolation Forest + K-Means/GMM sobre `build_preprocessor()` + PCA, **sin usar la etiqueta**. La etiqueta se usará después para interpretar los clústeres y el top de anomalías. Pistas del EDA: t-SNE muestra varios grupos de fallas, y la suma de los histogramas separa camiones por nivel de uso.
+Para esta parte usamos K-Means e Isolation Forest con una muestra aleatoria de 10 000 registros de entrenamiento. Los métodos se ajustaron sin usar las etiquetas. Después del preprocesamiento quedaron 141 variables y PCA conservó el 90,3 % de la varianza con 53 componentes. Probamos entre 2 y 6 grupos y elegimos 4 por la silueta (0,301); el índice Davies-Bouldin fue 1,780.
 
-### 6.4 Análisis comparativo y video — _pendiente_
+El grupo 3 quedó con 1 069 registros y 122 fallas (11,41 %). Isolation Forest marcó 200 anomalías; 52 tenían falla (26 %) y 113 estaban en el grupo 3. Estos resultados describen la muestra, no son un diagnóstico ni una evaluación en test. La etiqueta se usó después de entrenar para entender los resultados.
 
-Responder las 8 preguntas de la sección 5 de la guía en `04_comparativo_conclusiones.ipynb` y grabar el video (≤ 12 min, unos 4 min por integrante).
+### 6.4 Análisis comparativo y video
 
-**Video:** _[enlace pendiente]_
+Las ocho preguntas de la guía se responden en `04_comparativo_conclusiones.ipynb`. **Video: pendiente** (máximo 12 minutos, con participación de todos).
 
 ## 7. Decisiones técnicas documentadas
 
